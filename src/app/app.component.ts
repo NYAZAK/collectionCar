@@ -54,4 +54,20 @@ this.carS.update({model: name.value, price: price.value, id: +id}).subscribe(
   },
   (err) => this.error = err);
 }
+
+deleteCar(id){ 
+  this.success = '';
+  this.error = '';
+
+  this.carS.delete(+id).subscribe(
+    (res: Car[])=> {
+      this.cars = res;
+      this.success = 'Supprimer avec succès';
+    }, 
+    err => {
+      this.error = err;
+    }
+  )
+
+}
 }

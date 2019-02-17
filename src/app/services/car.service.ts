@@ -53,4 +53,16 @@ update(car: Car): Observable<Car[]>{
       }
   ),  catchError(this.handlerError));
 }
+
+delete(id: number): Observable<Car[]>{
+  const params = new HttpParams().set('id', id.toString());
+return this.http.delete(`${this.baseUrl}/delete`, {params: params}).pipe(
+  map(
+    (res) => {
+      const filteredCars = this.cars.filter((car) => {
+        return +car['id'] !== +id;
+      });
+      return this.cars = filteredCars;}),
+      catchError(this.handlerError));
+}
 }
