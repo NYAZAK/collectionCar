@@ -28,7 +28,15 @@ private handlerError(error: HttpErrorResponse){
       catchError(this.handlerError));
   }
 
-
+store(car: Car): Observable<Car[]>{
+  return this.http.post(`${this.baseUrl}/store`, {data: car}).pipe(
+    map((res) => {
+        this.cars.push(res['data']);
+        return this.cars;
+      }
+    ), 
+      catchError(this.handlerError));
+}
 
 
 }
