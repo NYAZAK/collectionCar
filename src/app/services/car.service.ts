@@ -7,7 +7,7 @@ import {Car} from '../shared/car.model';
   providedIn: 'root'
 })
 export class CarService {
-  baseUrl = 'http://localhost/api';
+  baseUrl = 'http://localhost/apy';
   public cars: Car[];
   public myel: string;
 
@@ -27,7 +27,7 @@ private handlerError(error: HttpErrorResponse){
       }),
       catchError(this.handlerError));
   }
-  
+
 
 
 
