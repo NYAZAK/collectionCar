@@ -1,10 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-<div *ngIf="error" class="alert-danger col-12 mx-auto text-center">{{error}}
-  <span (click)="error = !error" class="close text-danger">&times;</span>
+  <div class="row card" [ngStyle]="{
+    'z-index': 1
+  }">
+<div *ngIf="error" class="alert-danger col-12 mx-auto text-center position-fixed text-uppercase align-middle">{{error}}
+  <span (click)="error = !error" class="close text-danger" [ngStyle]="{height: '50px'}">&times;</span>
 </div>
-<div *ngIf="success" class="alert-success col-12 mx-auto text-center">{{success}} 
-    <span (click)="success = !success" class="close text-danger">&times;</span>
+<div *ngIf="success" class="alert-success col-12 mx-auto text-center position-fixed text-uppercase align-middle">{{success}} 
+    <span (click)="success = !success" class="close text-danger" [ngStyle]="{height: '50px'}">&times;</span>
+</div>
 </div>
 
 <div id="theList" class="mx-auto col-10">
