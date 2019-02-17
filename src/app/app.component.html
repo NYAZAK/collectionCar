@@ -1,19 +1,46 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-<div *ngIf="error">{{error}}</div>
-<div *ngIf="success">{{success}}</div>
-<div id="theList" class="mx-auto col-10">
-  <h2 class="text-center">Liste</h2>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let item of cars">
-        <div class="row">
-      <p class="mr-auto" >  {{item.model}} :</p>
-      <p class="ml-auto"> {{item.price | currency: 'EUR'}}</p>
-    </div>
-      </li>
-    </ul>
+<div *ngIf="error" class="alert-danger col-12 mx-auto text-center">{{error}}
+  <span (click)="error = !error" class="close text-danger">&times;</span>
 </div>
-<router-outlet></router-outlet>
+<div *ngIf="success" class="alert-success col-12 mx-auto text-center">{{success}} 
+    <span (click)="success = !success" class="close text-danger">&times;</span>
+</div>
+
+<div id="theList" class="mx-auto col-10">
+    <h2 class="text-center">Liste</h2>
+    <div class="list-group col-12">
+      <div *ngFor="let item of cars;let i = index;" class="list-group-item row">
+        <div class="row">
+        <div class="col-6">
+          <input type="text"
+                 [(ngModel)]="cars[i].model"
+                 class="form-control"
+                 required
+                 #model="ngModel"
+                 [ngClass]="{ 'is-invalid': model.touched && model.invalid }">
+                 <!-- pattern="^[a-zA-Z]+$" -->
+        </div> :
+        <div class="col-4 ml-auto">
+          <input type="number"
+                 [(ngModel)]="cars[i].price"
+                 class="form-control"
+                 required
+                 #price="ngModel"
+                 [ngClass]="{ 'is-invalid': price.touched && price.invalid }">
+        </div>
+      </div>
+        <div class="col-md-6 mt-1 mr-auto">
+          <input type="button"
+                 value="Update"
+                 class="btn btn-success btn-sm"
+                 [disabled]="model.invalid || price.invalid"
+                 (click)="updateCar(model, price, item.id)">
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 <div id="theForm"  class="col-8 mx-auto mt-5 pb-5">
@@ -56,3 +83,5 @@
   </form>
 </div>
 </div>
+
+<router-outlet></router-outlet>

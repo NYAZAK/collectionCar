@@ -42,4 +42,16 @@ addCar(f) {
     (err) => this.error =err);
 }
 
+
+updateCar(name, price, id){
+this.success = "";
+this.error = "";
+
+this.carS.update({model: name.value, price: price.value, id: +id}).subscribe(
+  (res) => {
+    this.cars = res;
+    this.success = 'modifier avec succes';
+  },
+  (err) => this.error = err);
+}
 }
